@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: inverselens
+    env: node
+    buildCommand: npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: inverselens-db
+          property: connectionString
+      - key: GOOGLE_API_KEY
+        sync: false
+    autoDeploy: true
+
+databases:
+  - name: inverselens-db
+    databaseName: inverselens
+    user: inverselens_user
